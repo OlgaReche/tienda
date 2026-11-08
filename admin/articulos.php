@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         poner_mensaje('Artículo "' . $art['nombre'] . '" eliminado.');
     }
     redirigir('/admin/articulos.php');
+    <?php if ($art['color']): ?><li><strong>C
+        <!-- -->olor:</strong> <?= e($art['color']) ?></li><?php endif; ?>
 }
 
 $articulos = articulo_listar_todos();
@@ -42,7 +44,7 @@ require __DIR__ . '/../vistas/cabecera.php';
 
 <table class="tabla">
     <thead>
-        <tr><th></th><th>Artículo</th><th>Talla</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr>
+        <tr><th></th><th>Artículo</th><th>Talla</th><th>Precio</th><th>Color</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr>
     </thead>
     <tbody>
     <?php foreach ($articulos as $art): ?>
@@ -51,6 +53,7 @@ require __DIR__ . '/../vistas/cabecera.php';
             <td><strong><?= e($art['nombre']) ?></strong><br><small><?= e($art['marca']) ?></small></td>
             <td><?= e((string)(float)$art['talla']) ?></td>
             <td><?= precio($art['precio']) ?></td>
+            <td><?= e($art['color']) ?></td>
             <td class="<?= $art['stock'] == 0 ? 'agotado' : '' ?>"><?= (int)$art['stock'] ?></td>
             <td><?= $art['activo'] ? 'A la venta' : 'Oculto' ?></td>
             <td class="celda-acciones">

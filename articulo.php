@@ -29,6 +29,9 @@ require __DIR__ . '/vistas/cabecera.php';
         <p><?= nl2br(e($art['descripcion'])) ?></p>
         <ul class="datos">
             <li><strong>Talla:</strong> <?= e((string)(float)$art['talla']) ?></li>
+            <?php if (!empty($art['color'])): ?>
+                <li><strong>Color:</strong> <?= e($art['color']) ?></li>
+            <?php endif; ?>
             <li><strong>Disponibles:</strong> <?= (int)$art['stock'] ?> unidades</li>
         </ul>
 

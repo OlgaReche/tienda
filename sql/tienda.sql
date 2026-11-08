@@ -36,6 +36,7 @@ CREATE TABLE articulos (
     marca        VARCHAR(50)  NOT NULL,
     descripcion  TEXT NULL,
     talla        DECIMAL(3,1) NOT NULL,                 -- p. ej. 42 o 42.5
+    color        VARCHAR(30)  NULL,
     precio       DECIMAL(8,2) NOT NULL CHECK (precio >= 0),
     stock        INT UNSIGNED NOT NULL DEFAULT 0,
     imagen       VARCHAR(255) NULL,                     -- nombre del archivo en img/articulos/

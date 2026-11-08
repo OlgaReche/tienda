@@ -30,20 +30,20 @@ function articulo_buscar_por_id(int $id): ?array
 
 function articulo_insertar(array $a): int
 {
-    ejecutar('INSERT INTO articulos (nombre, marca, descripcion, talla, precio, stock, imagen, activo)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-             'sssddisi',
-             [$a['nombre'], $a['marca'], $a['descripcion'], $a['talla'],
+    ejecutar('INSERT INTO articulos (nombre, marca, descripcion, talla, color, precio, stock, imagen, activo)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+             'sssdsdisi',
+             [$a['nombre'], $a['marca'], $a['descripcion'], $a['talla'], $a['color'],
               $a['precio'], $a['stock'], $a['imagen'], $a['activo']]);
     return mysqli_insert_id(conectar());
 }
 
 function articulo_actualizar(int $id, array $a): void
 {
-    ejecutar('UPDATE articulos SET nombre = ?, marca = ?, descripcion = ?, talla = ?,
+    ejecutar('UPDATE articulos SET nombre = ?, marca = ?, descripcion = ?, talla = ?, color = ?,
               precio = ?, stock = ?, imagen = ?, activo = ? WHERE id = ?',
-             'sssddisii',
-             [$a['nombre'], $a['marca'], $a['descripcion'], $a['talla'],
+             'sssdsdisii',
+             [$a['nombre'], $a['marca'], $a['descripcion'], $a['talla'], $a['color'],
               $a['precio'], $a['stock'], $a['imagen'], $a['activo'], $id]);
 }
 

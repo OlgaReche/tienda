@@ -17,7 +17,7 @@ $errores = [];
 
 if ($es_alta) {
     $datos = ['nombre' => '', 'marca' => '', 'descripcion' => '', 'talla' => '',
-              'precio' => '', 'stock' => '0', 'imagen' => null, 'activo' => 1];
+              'precio' => '', 'color' => '', 'stock' => '0', 'imagen' => null, 'activo' => 1];
 } else {
     $datos = articulo_buscar_por_id($id);
     if (!$datos) {
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descripcion' => post_texto('descripcion'),
         'talla'       => str_replace(',', '.', post_texto('talla')),
         'precio'      => str_replace(',', '.', post_texto('precio')),
+        'color'       => post_texto('color'),
         'stock'       => post_texto('stock'),
         'imagen'      => $imagen_anterior,
         'activo'      => filter_has_var(INPUT_POST, 'activo') ? 1 : 0,
@@ -61,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$errores) {
         $datos['talla']  = (float) $datos['talla'];
         $datos['precio'] = (float) $datos['precio'];
+        $color = trim($datos['color']);
+        $datos['color']  = $color === '' ? null : $color;
         $datos['stock']  = (int) $datos['stock'];
 
         if ($es_alta) {
@@ -96,6 +99,11 @@ require __DIR__ . '/../vistas/cabecera.php';
 
         <label>Descripción
             <textarea name="descripcion" rows="3"><?= e($datos['descripcion']) ?></textarea>
+        </label>
+
+        <label>Color
+            <input type="text" name="color" value="<?= e($datos['color'] ?? '') ?>" maxlength="30" placeholder="Ej.: Azul marino">
+            <?= $err('color') ?>
         </label>
 
         <div class="tres-columnas">
