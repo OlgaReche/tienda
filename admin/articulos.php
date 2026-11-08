@@ -29,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         poner_mensaje('Artículo "' . $art['nombre'] . '" eliminado.');
     }
     redirigir('/admin/articulos.php');
-    <?php if ($art['color']): ?><li><strong>C
-        <!-- -->olor:</strong> <?= e($art['color']) ?></li><?php endif; ?>
 }
 
 $articulos = articulo_listar_todos();
